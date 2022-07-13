@@ -17,7 +17,7 @@ export default function Grid () {
 
     const bringPokemonFromApi = (id: number, pokemonsList: Array<Pokemon>) => {        
         fetch(`https://pokeapi.co/api/v2/pokemon/${id}/`).then(response => response.json())
-        .then(data => pokemonsList.push( { name: data["name"], number:data["id"].toString(), powers: data["types"], imgSource: data["sprites"]["front_default"] } ));
+        .then(data => pokemonsList.push( { name: data["name"], number:data["id"].toString(), powers: data["types"], imgSource: data["sprites"]["other"]["dream_world"]["front_default"] } ));
         return
     }
 
