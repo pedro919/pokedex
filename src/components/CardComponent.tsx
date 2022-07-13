@@ -8,7 +8,6 @@ type CardProps = {
   }
 
   export const Card = (props: CardProps) => {
-    //console.log(props.powers)
     const powers:Array<string> = []
     const power1 = props.powers[0]["type"]["name"]
     powers.push(power1)
@@ -19,7 +18,7 @@ type CardProps = {
     return (
         <div className="sm:max-w-xs sm:max-h-xs">
             <div className="sm:max-w-xs sm:max-h-xs bg-gray-200 flex flex-row items-center justify-center">
-            <img src={props.imgSource} className="sm:max-w-xs sm:max-h-xs h-52" alt={props.name}/>
+                <img src={props.imgSource} className="sm:max-w-xs sm:max-h-xs h-52" alt={props.name}/>
             </div>
             <p className="text-gray-500 font-bold text-sm">N.°{props.number}</p>
             <h2 className="text-gray-800 font-medium">{props.name}</h2>

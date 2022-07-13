@@ -17,7 +17,7 @@ export default function Grid () {
 
     const bringPokemonFromApi = (id: number, pokemonsList: Array<Pokemon>) => {        
         fetch(`https://pokeapi.co/api/v2/pokemon/${id}/`).then(response => response.json())
-        .then(data => pokemonsList.push( { name: data["name"], number:data["id"].toString(), powers: data["types"], imgSource: data["sprites"]["other"]["dream_world"]["front_default"] } ));
+        .then(data => pokemonsList.push( { name: data["name"], number:data["id"].toString(), powers: data["types"], imgSource: data["sprites"]["front_default"] } ));
         return
     }
 
@@ -27,24 +27,20 @@ export default function Grid () {
             for (let i = lastBrought+1; i <= lastBrought + 12; i++){
                 await bringPokemonFromApi(i, pokemonsList);
             }
+            setPokemon(pokemonsList)
         }
-        setPokemon(pokemonsList)
-        }
+        
+    }
 
     useEffect(() => {
-        console.log('Entrando al use effect')
         if (lastBrought === 0){
-            loadMorePokemonsHandler().then(res => {console.log('Todo listo')})
-        }      
-        console.log('Saliendo del use effect')
+            loadMorePokemonsHandler()
+        }
     })
 
     const loadMorePokemonsHandler = async() => {
-        console.log('Entrando al handler')
         setLoading(true)
-        await bring12PokemonsFromApi('normal')        
-        console.log(pokemons.length)        
-        console.log('Saliendo del handler')
+        await bring12PokemonsFromApi('normal')
         setLastBrought(lastBrought+12)
         setLoading(false)
     }
@@ -52,22 +48,34 @@ export default function Grid () {
     if (!loading) {
 
     return (
-                <div className="">
-                    <span>{pokemons.length}</span>
-                    {pokemons &&
-                    <div className="grid sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-x-5 gap-y-10 justify-center items-stretch">
-                        {pokemons.map(pokemon => (
-                            <Card key={pokemon.number} name={pokemon.name} number={pokemon.number} powers={pokemon.powers} imgSource={pokemon.imgSource}/>
-                    ))}
-                    </div>}
-                    <div className="flex flex-row justify-center mt-14 mb-14">
-                        <button className="bg-[#2596be] text-white h-12 w-72 rounded-md flex flex-row items-center justify-center" onClick={loadMorePokemonsHandler} >Cargar más Pokémon <Icon icon="mdi:pokeball" className="ml-2"/></button>
+        <div className="">
+            <nav className="mt-10 mb-10">
+                <div className="flex flex-col lg:flex-row lg:justify-between 2xl:mr-10 gap-y-8 gap-x-10">
+                    <button className="bg-[#2596be] h-12 w-80 text-white rounded-md flex flex-row items-center justify-center"> <Icon icon="ic:sharp-loop" className="mr-3" />¡Sorpréndeme!</button>
+                    <div className="h-12 w-80 bg-[#383434] flex flex-row items-center justify-start rounded-md">
+                        <select className="block w-full h-full rounded-lg bg-transparent text-white hover:bg-red">
+                            <option className="text-gray-900"> Ordenar por...</option>
+                            <option className="text-gray-900">Número inferior</option>
+                            <option className="text-gray-900">Número superior</option>
+                            <option className="text-gray-900">A-Z</option>
+                            <option className="text-gray-900">Z-A</option>
+                        </select>
                     </div>
                 </div>
+            </nav>                    
+            {pokemons &&
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-x-5 gap-y-10 justify-center items-stretch">
+                {pokemons.map(pokemon => (
+                    <Card key={pokemon.number} name={pokemon.name} number={pokemon.number} powers={pokemon.powers} imgSource={pokemon.imgSource}/>
+                ))}
+            </div>}
+            <div className="flex flex-row justify-center mt-14 mb-14">
+                <button className="bg-[#2596be] text-white h-12 w-72 rounded-md flex flex-row items-center justify-center" onClick={loadMorePokemonsHandler} >Cargar más Pokémon <Icon icon="mdi:pokeball" className="ml-2"/></button>
+            </div>
+        </div>
                 
-                );
+        );
     }
 
     else {return (<div>CARGANDO</div>)}
-
   }
