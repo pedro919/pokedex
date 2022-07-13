@@ -50,7 +50,7 @@ export default function Grid () {
     return (
         <div className="">
             <nav className="mt-10 mb-10">
-                <div className="flex flex-col lg:flex-row lg:justify-between 2xl:mr-10 gap-y-8 gap-x-10">
+                <div className="flex flex-col items-center lg:flex-row lg:justify-between 2xl:mr-10 gap-y-8 gap-x-10">
                     <button className="bg-[#2596be] h-12 w-80 text-white rounded-md flex flex-row items-center justify-center"> <Icon icon="ic:sharp-loop" className="mr-3" />¡Sorpréndeme!</button>
                     <div className="h-12 w-80 bg-[#383434] flex flex-row items-center justify-start rounded-md">
                         <select className="block w-full h-full rounded-lg bg-transparent text-white hover:bg-red">
