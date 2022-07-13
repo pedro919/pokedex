@@ -48,7 +48,7 @@ export default function Grid () {
     if (!loading) {
 
     return (
-        <div className="">
+        <div>
             <nav className="mt-10 mb-10">
                 <div className="flex flex-col items-center lg:flex-row lg:justify-between 2xl:mr-10 gap-y-8 gap-x-10">
                     <button className="bg-[#2596be] h-12 w-80 text-white rounded-md flex flex-row items-center justify-center"> <Icon icon="ic:sharp-loop" className="mr-3" />¡Sorpréndeme!</button>
